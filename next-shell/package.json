@@ -1,0 +1,30 @@
+{
+  "name": "next-shell",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "rm -rf ./.next && NEXT_PRIVATE_LOCAL_WEBPACK=true NODE_OPTIONS=\"--max_old_space_size=8000\"  next dev --port=4200",
+    "build": "NEXT_PRIVATE_LOCAL_WEBPACK=true next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@module-federation/nextjs-mf": "^8.6.3",
+    "next": "14.2.15",
+    "react": "^18",
+    "react-dom": "^18",
+    "zone.js": "~0.13.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.15",
+    "typescript": "^5",
+    "webpack": "^5.95.0",
+    "@angular/common": "16.2.12",
+    "@angular/core": "16.2.12",
+    "@angular/router": "16.2.12"
+  }
+}
