@@ -1,12 +1,12 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Observable, Subscription } from "rxjs";
-import { ProfileUserService } from "./profile-user/profile-user.service";
-import { IUser } from "./models/user";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { ProfileUserService } from './profile-user/profile-user.service';
+import { IUser } from './models/user';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   currentUser$: Observable<IUser> = new Observable();

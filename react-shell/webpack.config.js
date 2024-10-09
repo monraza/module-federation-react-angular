@@ -6,7 +6,7 @@ module.exports = {
   entry: "./src/index",
   mode: "development",
   devServer: {
-    port: 3001,
+    port: 3003,
     headers: {
       "Access-Control-Allow-Origin": "*",
     },
@@ -43,19 +43,40 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "profile_user",
+      name: "reactShell",
       filename: "remoteEntry.js",
-      exposes: {
-        "./ProfileReactComponent": "./src/ProfileReactComponent",
+      remotes: {
+        profile_user: `profile_user@http://localhost:3001/remoteEntry.js`,
+        angularApp: `angularApp@http://localhost:4201/remoteEntry.js`,
       },
+      exposes: {},
       shared: {
-        react: {
+        react: { singleton: true, requiredVersion: "^18.0.0" },
+        "react-dom": { singleton: true, requiredVersion: "^18.0.0" },
+        "@angular/core": {
           singleton: true,
-          requiredVersion: deps.react,
+          strictVersion: true,
+          requiredVersion: "^16.2.12",
         },
-        "react-dom": {
+        "@angular/common": {
           singleton: true,
-          requiredVersion: deps["react-dom"],
+          strictVersion: true,
+          requiredVersion: "^16.2.12",
+        },
+        "@angular/common/http": {
+          singleton: true,
+          strictVersion: true,
+          requiredVersion: "^16.2.12",
+        },
+        "@angular/router": {
+          singleton: true,
+          strictVersion: true,
+          requiredVersion: "^16.2.12",
+        },
+        "zone.js": {
+          singleton: true,
+          strictVersion: true,
+          requiredVersion: "~0.13.0",
         },
       },
     }),

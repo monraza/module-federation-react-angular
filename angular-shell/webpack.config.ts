@@ -1,11 +1,18 @@
-import { container } from "webpack";
-const deps = require("./package.json").dependencies;
+import { container } from 'webpack';
+const mf = require('@angular-architects/module-federation/webpack');
+const path = require('path');
 
+const deps = require('./package.json').dependencies;
+const sharedMappings = new mf.SharedMappings();
+
+sharedMappings.register(path.join(__dirname, 'tsconfig.json'), [
+  /* mapped paths to share */
+]);
 module.exports = {
   output: {
-    publicPath: "http://localhost:4201/",
-    uniqueName: "musicapp",
-    scriptType: "text/javascript",
+    publicPath: 'http://localhost:4201/',
+    uniqueName: 'angularApp',
+    scriptType: 'text/javascript',
   },
   optimization: {
     runtimeChunk: false,
@@ -13,27 +20,38 @@ module.exports = {
   devServer: {
     port: 4201,
     headers: {
-      "Access-Control-Allow-Origin": "*",
+      'Access-Control-Allow-Origin': '*',
     },
     hot: true,
   },
+  experiments: {
+    topLevelAwait: true,
+  },
+  resolve: {
+    alias: {
+      ...sharedMappings.getAliases(),
+    },
+  },
   plugins: [
     new container.ModuleFederationPlugin({
-      name: "angular-shell",
-      filename: "remoteEntry.js",
+      name: 'angularApp',
+      filename: 'remoteEntry.js',
       remotes: {
         profile_user: `profile_user@http://localhost:3001/remoteEntry.js`,
-        settings_user: `settings_user@http://localhost:3002/remoteEntry.js`,
+      },
+      exposes: {
+        './ProfileComponent': './src/app/profile-info/profile.component.web.ts',
       },
       shared: {
         react: {
           singleton: true,
           requiredVersion: deps.react,
         },
-        "react-dom": {
+        'react-dom': {
           singleton: true,
-          requiredVersion: deps["react-dom"],
+          requiredVersion: deps['react-dom'],
         },
+        ...sharedMappings.getDescriptors(),
       },
     }),
   ],

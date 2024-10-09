@@ -58,3 +58,5 @@ export const ProfileReactComponent: FunctionComponent<IProfileProps> = (
     </div>
   );
 };
+
+export default ProfileReactComponent;

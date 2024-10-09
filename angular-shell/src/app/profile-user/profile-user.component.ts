@@ -6,19 +6,19 @@ import {
   Output,
   ViewChild,
   ViewEncapsulation,
-} from "@angular/core";
-import * as React from "react";
-import * as ReactDom from "react-dom";
+} from '@angular/core';
+import * as React from 'react';
+import * as ReactDom from 'react-dom';
 
-import { createRoot } from "react-dom/client";
-import { IUser } from "../models/user";
-import { ProfileUserService } from "./profile-user.service";
+import { createRoot } from 'react-dom/client';
+import { IUser } from '../models/user';
+import { ProfileUserService } from './profile-user.service';
 
-const containerElementName = "customReactComponentContainer";
+const containerElementName = 'customReactComponentContainer';
 
 @Component({
   standalone: true,
-  selector: "app-profile-user",
+  selector: 'app-profile-user',
   template: `<div style="margin: 35px">
     <h2 style="color: cadetblue">Profile (React Microfrontend)</h2>
     <div
@@ -32,7 +32,7 @@ const containerElementName = "customReactComponentContainer";
   encapsulation: ViewEncapsulation.None,
 })
 export class ProfileUserComponent {
-  @Input() user: IUser = { name: "John", email: "john.dou@gmail.com" };
+  @Input() user: IUser = { name: 'John', email: 'john.dou@gmail.com' };
 
   @ViewChild(containerElementName, { static: true }) containerRef!: ElementRef;
   root!: any;
@@ -47,9 +47,9 @@ export class ProfileUserComponent {
 
   ngAfterViewInit() {
     this.root = createRoot(this.containerRef.nativeElement);
-    this.root.render("Loading script...");
+    this.root.render('Loading script...');
     try {
-      import("profile_user/ProfileReactComponent").then((val) => {
+      import('profile_user/ProfileReactComponent').then((val) => {
         this.root.render(
           React.createElement(val.ProfileReactComponent, {
             ...this.user,
@@ -58,7 +58,7 @@ export class ProfileUserComponent {
         );
       });
     } catch (error) {
-      console.log("Erorr", error);
+      console.log('Erorr', error);
     }
   }
 
