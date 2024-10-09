@@ -1,7 +1,23 @@
-.container {
-    font-family: Inter, sans-serif;
-    margin-top: 10px;
+.profile-container {
+  display: block;
+  border: 2px dashed #61DAFB;
+  border-radius: 5px;
+  padding: 20px 10px 10px 10px;
+  position: relative;
 }
+
+.component-tag {
+  background-color: #61DAFB;
+  color: white;
+  font-weight: bold;
+  font-size: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px;
+  border-radius: 5px 0;
+}
+
 button {
     margin-top: 19px;
     background-color: transparent;

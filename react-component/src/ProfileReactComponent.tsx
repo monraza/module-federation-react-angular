@@ -33,7 +33,8 @@ export const ProfileReactComponent: FunctionComponent<IProfileProps> = (
   };
 
   return (
-    <div className="container">
+    <div className="profile-container">
+      <span className="component-tag">React</span>
       <div style={{ display: "flex", paddingTop: "10px" }}>
         <div>
           <label htmlFor="name">Name</label>
@@ -53,7 +54,7 @@ export const ProfileReactComponent: FunctionComponent<IProfileProps> = (
             onChange={handleChange}
           />
         </div>
-        <button onClick={updateCurrentUser}>Summit</button>
+        <button onClick={updateCurrentUser}>Submit</button>
       </div>
     </div>
   );

@@ -1,6 +1,9 @@
-.container {
+.main {
     font-family: Inter, sans-serif;
     margin-top: 10px;
+}
+.container {
+  margin-top: 20px
 }
 button {
     margin-top: 19px;

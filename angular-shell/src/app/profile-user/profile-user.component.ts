@@ -19,16 +19,7 @@ const containerElementName = 'customReactComponentContainer';
 @Component({
   standalone: true,
   selector: 'app-profile-user',
-  template: `<div style="margin: 35px">
-    <h2 style="color: cadetblue">Profile (React Microfrontend)</h2>
-    <div
-      style="font-family: Inter, sans-serif; color: rgb(140, 137, 137, 1); font-size: 13px"
-    >
-      This user profile component is being remotely loaded into the application
-      from React App using Webpack Module Federation
-    </div>
-    <span #${containerElementName}></span>
-  </div>`,
+  template: `<div><span #${containerElementName}></span></div>`,
   encapsulation: ViewEncapsulation.None,
 })
 export class ProfileUserComponent {

@@ -1,0 +1,19 @@
+.profile-container {
+  display: block;
+  border: 2px dashed #f44336;
+  border-radius: 5px;
+  padding: 10px;
+  position: relative;
+}
+
+.component-tag {
+  background-color: #f44336;
+  color: white;
+  font-weight: bold;
+  font-size: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px;
+  border-radius: 5px 0;
+}

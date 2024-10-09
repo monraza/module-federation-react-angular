@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-profile-component',
   templateUrl: './profile.component.html',
-  styleUrls: [],
+  styleUrls: ['./profile.component.scss'],
   standalone: true,
   imports: [CommonModule],
 })

@@ -6,6 +6,8 @@ import { SettingsComponent } from '../settings/settings.component';
   standalone: true,
   imports: [SettingsComponent, ProfileUserComponent],
   selector: 'app-layout',
-  template: `<app-profile-user></app-profile-user>`,
+  template: `<div class="container">
+    <app-profile-user></app-profile-user>
+  </div>`,
 })
 export class LayoutComponent {}
