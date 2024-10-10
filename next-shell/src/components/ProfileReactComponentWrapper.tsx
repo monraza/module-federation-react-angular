@@ -29,7 +29,11 @@ export const ProfileReactComponentWrapper: React.FC<
     if (typeof window !== "undefined") {
       setComponent(
         lazy(() =>
-          import("profile_user/ProfileReactComponent").catch(() => null)
+          import("profile_user/ProfileReactComponent").catch(() =>
+            console.error(
+              "Error: Couldn't load ProfileReactComponent from React Remote"
+            )
+          )
         )
       );
     }

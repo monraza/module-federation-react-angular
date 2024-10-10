@@ -23,8 +23,8 @@ const geistMono = localFont({
 
 export default function Home() {
   const initialUser = {
-    name: "",
-    email: "",
+    name: "Mr Smith",
+    email: "mr.smith@example.com",
   };
   const [user, setUser] = useState<IUser>(initialUser);
   const handleReactComponentEvent = (user: IUser) => {
@@ -34,7 +34,7 @@ export default function Home() {
 
   const handleAngularComponentEvent = (user: IUser) => {
     console.log("Log: handleAngularComponentEvent", { user });
-    setUser(initialUser);
+    setUser({ name: "", email: "" });
   };
   return (
     <>

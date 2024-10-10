@@ -17,20 +17,26 @@ export const ProfileAngularComponentWrapper: React.FC<
   console.log("Log: ProfileAngularComponentWrapper", { user });
   useEffect(() => {
     if (typeof window !== "undefined") {
-      import("angularApp/ProfileComponent").then((module) => {
-        if (angularComponentRef.current) {
-          angularComponentRef.current.removeEventListener(
-            "onReset",
-            (event) => onAngularComponentEvent(event.detail.user),
-            true
-          );
-          angularComponentRef.current.addEventListener(
-            "onReset",
-            (event) => onAngularComponentEvent(event.detail.user),
-            true
-          );
-        }
-      });
+      import("angularApp/ProfileComponent")
+        .then((module) => {
+          if (angularComponentRef.current) {
+            angularComponentRef.current.removeEventListener(
+              "onReset",
+              (event) => onAngularComponentEvent(event.detail.user),
+              true
+            );
+            angularComponentRef.current.addEventListener(
+              "onReset",
+              (event) => onAngularComponentEvent(event.detail.user),
+              true
+            );
+          }
+        })
+        .catch(() =>
+          console.error(
+            "Error: Couldn't load ProfileComponent from Angular Remote"
+          )
+        );
     }
   }, []);
 
