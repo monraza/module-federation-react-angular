@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 
 import "./profile-style.css";
 
@@ -18,6 +18,8 @@ export const ProfileReactComponent: FunctionComponent<IProfileProps> = (
 ) => {
   const [state, setState] = React.useState({ ...props });
 
+  console.log("Log: ProfileReactComponent", { props, state });
+
   function handleChange(e) {
     const key = e.target.name;
     const value = e.target.value;
@@ -27,6 +29,10 @@ export const ProfileReactComponent: FunctionComponent<IProfileProps> = (
       [key]: value,
     }));
   }
+
+  useEffect(() => {
+    setState({ ...props });
+  }, [props]);
 
   const updateCurrentUser = () => {
     props.onClick({ name: state.name, email: state.email });

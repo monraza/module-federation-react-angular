@@ -1,9 +1,12 @@
 import "zone.js";
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
-import ProfileReactComponentWrapper from "@/components/ProfileReactComponentWrapper";
+import ProfileReactComponentWrapper, {
+  IUser,
+} from "@/components/ProfileReactComponentWrapper";
 
 import ProfileAngularComponentWrapper from "@/components/ProfileAngularComponentWrapper";
 
@@ -19,6 +22,20 @@ const geistMono = localFont({
 });
 
 export default function Home() {
+  const initialUser = {
+    name: "",
+    email: "",
+  };
+  const [user, setUser] = useState<IUser>(initialUser);
+  const handleReactComponentEvent = (user: IUser) => {
+    console.log("Log: handleReactComponentEvent", { user });
+    setUser(user);
+  };
+
+  const handleAngularComponentEvent = (user: IUser) => {
+    console.log("Log: handleAngularComponentEvent", { user });
+    setUser(initialUser);
+  };
   return (
     <>
       <Head>
@@ -39,8 +56,14 @@ export default function Home() {
             height={38}
             priority
           />
-          <ProfileAngularComponentWrapper />
-          <ProfileReactComponentWrapper />
+          <ProfileAngularComponentWrapper
+            user={user}
+            onAngularComponentEvent={handleAngularComponentEvent}
+          />
+          <ProfileReactComponentWrapper
+            user={user}
+            onReactComponentEvent={handleReactComponentEvent}
+          />
         </main>
         <footer className={styles.footer}>
           <a

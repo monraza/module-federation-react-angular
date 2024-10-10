@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
-import { IUser } from "../models/user";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { IUser } from '../models/user';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class ProfileUserService {
   private currentUserSubject = new BehaviorSubject<IUser>({
-    name: "John",
-    email: "john.dou@gmail.com",
+    name: '____',
+    email: '____',
   });
   public currentUser$: Observable<IUser> = this.currentUserSubject;
 

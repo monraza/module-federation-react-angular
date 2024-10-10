@@ -8,9 +8,19 @@ export interface IUser {
 export interface IProfileProps {
   name: string;
   email: string;
+  onClick: (user: IUser) => void;
 }
 
-export const ProfileReactComponentWrapper = () => {
+export interface ProfileReactComponentWrapperProps {
+  user: IUser;
+  onReactComponentEvent: (user: IUser) => void;
+}
+
+export const ProfileReactComponentWrapper: React.FC<
+  ProfileReactComponentWrapperProps
+> = ({ user, onReactComponentEvent }) => {
+  console.log("Log: ProfileReactComponentWrapper", { user });
+
   const [Component, setComponent] = useState<React.LazyExoticComponent<
     React.ComponentType<IProfileProps>
   > | null>(null);
@@ -23,11 +33,17 @@ export const ProfileReactComponentWrapper = () => {
         )
       );
     }
-  }, []);
+  }, [user]);
+
+  const handleSubmit = (user: IUser) => {
+    onReactComponentEvent(user);
+  };
 
   return (
     <div className="container">
-      {Component && <Component name="John Doe" email="john.doe@example.com" />}
+      {Component && (
+        <Component name={user.name} email={user.email} onClick={handleSubmit} />
+      )}
     </div>
   );
 };

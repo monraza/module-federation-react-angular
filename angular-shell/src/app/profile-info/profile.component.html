@@ -2,8 +2,8 @@
   <span class="component-tag">Angular</span>
   <h3>Profile Info</h3>
   <div class="profile-details">
-    <h3>Hi {{ (currentUser$ | async)?.name }},</h3>
-    <h3>Your email is {{ (currentUser$ | async)?.email }}</h3>
-    <span>(you can change your name and email below)</span>
+    <h3>Hi {{ user.name }},</h3>
+    <h3>Your email is {{ user.email }}</h3>
   </div>
+  <div class="reset"><button (click)="resetUser()">Reset</button></div>
 </div>
