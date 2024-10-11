@@ -43,7 +43,7 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "reactShell",
+      name: "reactHost",
       filename: "remoteEntry.js",
       remotes: {
         profile_user: `profile_user@http://localhost:3001/remoteEntry.js`,

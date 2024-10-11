@@ -18,7 +18,7 @@ export const ProfileAngularComponentWrapper: React.FC<
   useEffect(() => {
     if (typeof window !== "undefined") {
       import("angularApp/ProfileComponent")
-        .then((module) => {
+        .then(() => {
           if (angularComponentRef.current) {
             angularComponentRef.current.removeEventListener(
               "onReset",

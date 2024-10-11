@@ -1,15 +1,51 @@
-import React, { useEffect } from "react";
-// import { createCustomElement } from "@angular/elements";
+import React, { useEffect, useRef } from "react";
 
-export const ProfileAngularComponentWrapper = ({ user, onUserUpdate }) => {
+export interface IUser {
+  name: string;
+  email: string;
+}
+
+export interface ProfileAngularComponentWrapperProps {
+  user: IUser;
+  onAngularComponentEvent: (user: IUser) => void;
+}
+
+export const ProfileAngularComponentWrapper: React.FC<
+  ProfileAngularComponentWrapperProps
+> = ({ user, onAngularComponentEvent }) => {
+  const angularComponentRef = useRef(null);
   useEffect(() => {
-    // Dynamically import the Angular component
-    import("angularApp/ProfileComponent");
+    import("angularApp/ProfileComponent")
+      .then((module) => {
+        if (angularComponentRef.current) {
+          angularComponentRef.current.removeEventListener(
+            "onReset",
+            (event) => onAngularComponentEvent(event.detail.user),
+            true
+          );
+          angularComponentRef.current.addEventListener(
+            "onReset",
+            (event) => onAngularComponentEvent(event.detail.user),
+            true
+          );
+        }
+      })
+      .catch(() =>
+        console.error(
+          "Error: Couldn't load ProfileComponent from Angular Remote"
+        )
+      );
   }, []);
+
+  useEffect(() => {
+    if (angularComponentRef.current) {
+      angularComponentRef.current.user = user;
+    }
+  }, [user]);
 
   return (
     <div className="container">
-      <app-profile-component></app-profile-component>
+      <app-profile-component ref={angularComponentRef}></app-profile-component>
     </div>
   );
 };
